@@ -11,7 +11,7 @@ public class Tutorial : MonoBehaviour {
 
 	void Update () {
 		if (Input.GetKeyDown ("space") || Input.GetKeyDown ("left ctrl")) {
-				Application.LoadLevel (1); 
+			Application.LoadLevel (1);
 		}
 		if (Input.GetKeyDown(KeyCode.Tab)) {
 			SayTutorial ();

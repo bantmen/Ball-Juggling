@@ -10,13 +10,18 @@ public class BallMovement : MonoBehaviour {
 
 	PlayerMovement script;
 	bool kicked = false;
+	public AudioClip kick_hit_sound;
+	public AudioClip kick_swing_sound;
 
 	public bool gameOver;
 
-	public int score = 0;
+	public float score;
+	public float temp_kickCount;
 
 	bool sayOnce;
 	public AudioClip game_over;
+
+	public bool playLoud;
 
 	void Start () {
 		GameObject go = GameObject.Find ("Player");
@@ -24,6 +29,12 @@ public class BallMovement : MonoBehaviour {
 
 		gameOver = false;
 		sayOnce = true;
+
+		score = 0;
+		temp_kickCount = 0;
+
+		if (playLoud) audio.volume = 0.30f;
+		else audio.volume = 0.05f;
 	}
 
 	void Update () {
@@ -36,10 +47,12 @@ public class BallMovement : MonoBehaviour {
 				gameOver = true;
 				audio.PlayOneShot(game_over);
 				sayOnce = false;
-				System.Diagnostics.Process.Start ("say", "To continue the game press Space key   " +
+				Mathf.Round(score);
+				System.Diagnostics.Process.Start ("say", "Your score was" + score +
+				        "     To continue the game press Q button   " +
 					    "To go to the tutorial screen press the Tab key");
 			}
-			if (Input.GetKeyDown ("space") || Input.GetKeyDown ("left ctrl")) {
+			if (Input.GetKeyDown (KeyCode.Q)) {
 				Application.LoadLevel (1); 
 			}
 			if (Input.GetKeyDown(KeyCode.Tab)) {
@@ -52,12 +65,21 @@ public class BallMovement : MonoBehaviour {
 		if (!gameOver){
 			if (kicked) {
 				kicked = false;
-				if (-epsilon < transform.position.y && epsilon > transform.position.y){ //accepted interval of kicking 
+				if (-epsilon < transform.position.y && epsilon > transform.position.y){ //accepted interval
 					//play the audio
 					audio.Stop ();
 					audio.Play ();
 					velocity.y = Random.Range (4.5f, 7.5f);
-					score += 1;
+					score += 100 / temp_kickCount;
+					temp_kickCount = 0;
+					audio.volume = 0.90f;
+					audio.PlayOneShot(kick_hit_sound);
+					if (playLoud) audio.volume = 0.30f;
+					else audio.volume = 0.05f;
+				}
+				else{
+					audio.PlayOneShot(kick_swing_sound);
+					UnityEngine.Debug.Log("should play swing");
 				}
 			}
 			Vector3 temp = transform.position;
