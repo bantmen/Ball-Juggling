@@ -10,13 +10,15 @@ public class MoveGetReady : MonoBehaviour {
 		GameObject go = GameObject.Find ("ball");
 		script = go.GetComponent <BallMovement> ();
 	}
-	
+
 	void FixedUpdate () {
 		if (transform.position.z != -10 && Time.time > countdown) {
-			Debug.Log ("Declared");
+			UnityEngine.Debug.Log ("Declared");
 			Vector3 temp = transform.position;
 			temp.z = -10;
 			transform.position = temp;
 		}
 	}
 }
+
+

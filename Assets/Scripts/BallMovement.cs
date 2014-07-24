@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Diagnostics;
 
 public class BallMovement : MonoBehaviour {
 
@@ -14,11 +15,14 @@ public class BallMovement : MonoBehaviour {
 
 	public int score = 0;
 
+	bool sayOnce;
+
 	void Start () {
 		GameObject go = GameObject.Find ("Player");
 		script = go.GetComponent <PlayerMovement> ();
 
 		gameOver = false;
+		sayOnce = true;
 	}
 
 	void Update () {
@@ -28,6 +32,17 @@ public class BallMovement : MonoBehaviour {
 		if (transform.position.y < -0.8612219) {
 			audio.Stop ();
 			gameOver = true;
+			if (sayOnce){
+				sayOnce = false;
+				System.Diagnostics.Process.Start ("say", "To continue the game press Space key   " +
+					    "To go to the tutorial screen press the Tab key");
+			}
+			if (Input.GetKeyDown ("space") || Input.GetKeyDown ("left ctrl")) {
+				Application.LoadLevel (1); 
+			}
+			if (Input.GetKeyDown(KeyCode.Tab)) {
+				Application.LoadLevel(0);
+			}
 		}
 	}
 
