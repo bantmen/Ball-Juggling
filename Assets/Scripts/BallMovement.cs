@@ -5,7 +5,7 @@ using System.Diagnostics;
 public class BallMovement : MonoBehaviour {
 
 	Vector3 velocity;
-	public Vector3 gravity;  //adjust with difficulty
+	public Vector3 gravity;  //adjust with the difficulty
 	public float epsilon = 0.003f;    //position interval in which our guy can kick the ball, adjust with difficulty
 
 	PlayerMovement script;
