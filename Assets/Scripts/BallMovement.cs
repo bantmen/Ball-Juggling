@@ -16,6 +16,7 @@ public class BallMovement : MonoBehaviour {
 	public int score = 0;
 
 	bool sayOnce;
+	public AudioClip game_over;
 
 	void Start () {
 		GameObject go = GameObject.Find ("Player");
@@ -30,9 +31,10 @@ public class BallMovement : MonoBehaviour {
 			kicked = true;
 		}
 		if (transform.position.y < -0.8612219) {
-			audio.Stop ();
-			gameOver = true;
 			if (sayOnce){
+				audio.Stop ();
+				gameOver = true;
+				audio.PlayOneShot(game_over);
 				sayOnce = false;
 				System.Diagnostics.Process.Start ("say", "To continue the game press Space key   " +
 					    "To go to the tutorial screen press the Tab key");
