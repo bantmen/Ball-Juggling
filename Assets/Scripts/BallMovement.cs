@@ -19,9 +19,9 @@ public class BallMovement : MonoBehaviour {
 	public float temp_kickCount;
 
 	bool sayOnce;
-	public AudioClip game_over;
+	public AudioClip game_over;  
 
-	public bool playLoud;
+	public byte playLoud;  //2 loudest 0 softest
 
 	void Start () {
 		GameObject go = GameObject.Find ("Player");
@@ -33,8 +33,9 @@ public class BallMovement : MonoBehaviour {
 		score = 0;
 		temp_kickCount = 0;
 
-		if (playLoud) audio.volume = 0.30f;
-		else audio.volume = 0.05f;
+		if (playLoud == 2) audio.volume = 0.300f;
+		else if (playLoud == 1) audio.volume = 0.175f;
+		else audio.volume = 0.050f;
 	}
 
 	void Update () {
@@ -74,8 +75,9 @@ public class BallMovement : MonoBehaviour {
 					temp_kickCount = 0;
 					audio.volume = 0.90f;
 					audio.PlayOneShot(kick_hit_sound);
-					if (playLoud) audio.volume = 0.30f;
-					else audio.volume = 0.05f;
+					if (playLoud == 2) audio.volume = 0.300f;
+					else if (playLoud == 1) audio.volume = 0.175f;
+					else audio.volume = 0.050f;
 				}
 				else{
 					audio.PlayOneShot(kick_swing_sound);
