@@ -48,10 +48,12 @@ public class BallMovement : MonoBehaviour {
 				gameOver = true;
 				audio.PlayOneShot(game_over);
 				sayOnce = false;
-				Mathf.Round(score);
-				System.Diagnostics.Process.Start ("say", "Your score was" + score +
-				        "     To continue the game press Q button   " +
-					    "To go to the tutorial screen press the Tab key");
+				UnityEngine.Debug.Log (Mathf.Round(score));
+				UnityEngine.Debug.Log( (int) score);
+				int a = (int) score;
+				UnityEngine.Debug.Log(a);
+				System.Diagnostics.Process.Start ("say", "Your score was" + a + "To continue the game press Q button");
+				StartCoroutine(WaitTalk("To go to the tutorial screen press the Tab key"));
 			}
 			if (Input.GetKeyDown (KeyCode.Q)) {
 				Application.LoadLevel (1); 
@@ -73,7 +75,7 @@ public class BallMovement : MonoBehaviour {
 					velocity.y = Random.Range (4.5f, 7.5f);
 					score += 100 / temp_kickCount;
 					temp_kickCount = 0;
-					audio.volume = 0.90f;
+					audio.volume = 0.900f;
 					audio.PlayOneShot(kick_hit_sound);
 					if (playLoud == 2) audio.volume = 0.300f;
 					else if (playLoud == 1) audio.volume = 0.175f;
@@ -88,6 +90,19 @@ public class BallMovement : MonoBehaviour {
 			velocity -= gravity;
 			temp += velocity * Time.deltaTime;
 			transform.position = temp;
+		}
+	}
+
+	IEnumerator WaitTalk (string message){
+		yield return new WaitForSeconds (5);
+		System.Diagnostics.Process.Start ("say", message);
+	}
+
+	void HighScoreSet (float score) {
+		int count = 0;
+		string [] highscoreArray = new string [5] {"High Score-1", "High Score-2", "High Score-3", "High Score-4", "High Score-5"}; 
+		while (count != 5) {
+			count += 1;
 		}
 	}
 }
