@@ -4,12 +4,11 @@ using System.Collections;
 public class Scoreboard : MonoBehaviour {
 
 	void Awake () {
-		PlayerPrefs.SetFloat ("High Score-1", 5);
-		PlayerPrefs.SetFloat ("High Score-2", 4);
-		PlayerPrefs.SetFloat ("High Score-3", 3);
-		PlayerPrefs.SetFloat ("High Score-4", 2);
-		PlayerPrefs.SetFloat ("High Score-5", 1);
-
+//		PlayerPrefs.SetInt ("High Score-1", 5400);
+//		PlayerPrefs.SetInt ("High Score-2", 2500);
+//		PlayerPrefs.SetInt ("High Score-3", 1350);
+//		PlayerPrefs.SetInt ("High Score-4", 780);
+		PlayerPrefs.SetInt ("High Score-5", 0);
 	}
 	
 	void Update () {

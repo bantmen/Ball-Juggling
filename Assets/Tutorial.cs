@@ -23,9 +23,11 @@ public class Tutorial : MonoBehaviour {
 						"you are an aspiring football player, who will try to keep a ball above the ground " +
 						"as long as possible by kicking it. You will earn more points the less number of times " +
 						"you kick in this game. So, try to kick efficiently, and make sure to not let the ball " +
-						"on your left to touch the ground level. The button to kick is Space Key. Your score will " +
-						"increase by 100 divided by the number of kicks it took you in each iteration " +
-						"The ball will be dropped after the whistle and you can track the location of the ball by the tone it makes" +
+						"touch the ground when it comes to your right side from your left side. The button to kick " +
+						"is Space Key. Your score will " +
+						"increase by 100 divided by the number of kicks it took you in each of the ball's iteration " +
+						"The ball will be dropped after the whistle and you can track the location of the ball " +
+						"by the tone it makes" +
 						". Press Space now to start the game.");
 	}
 

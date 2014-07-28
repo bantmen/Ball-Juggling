@@ -49,18 +49,22 @@ public class BallMovement : MonoBehaviour {
 				gameOver = true;
 				audio.PlayOneShot(game_over);
 				sayOnce = false;
-				UnityEngine.Debug.Log (Mathf.Round(score));
-				UnityEngine.Debug.Log( (int) score);
-				int a = (int) score;
-				UnityEngine.Debug.Log(a);
-				HighScoreSet(score);
-				Talk ("Your score was" + a + "To continue the game press Q button");
-				StartCoroutine(WaitTalk("To go to the tutorial screen press the Tab key"));
+				int scoreInt = (int) score;
+				UnityEngine.Debug.Log("score is: ");
+				UnityEngine.Debug.Log(scoreInt);
+				string scoreStr = scoreInt.ToString();
+				HighScoreSet(scoreInt);
+				Talk ("Your score was" + scoreStr + "To continue the game press Q button");
+				StartCoroutine(WaitTalk(6, "To listen to the highscores table press the W button. " +
+					"To go to the tutorial screen press the Tab key"));
+			}
+			if (Input.GetKeyDown (KeyCode.W)) {
+				HighScoreListen();
 			}
 			if (Input.GetKeyDown (KeyCode.Q)) {
 				Application.LoadLevel (1); 
 			}
-			if (Input.GetKeyDown(KeyCode.Tab)) {
+			else if (Input.GetKeyDown(KeyCode.Tab)) {
 				Application.LoadLevel(0);
 			}
 		}
@@ -95,9 +99,9 @@ public class BallMovement : MonoBehaviour {
 		}
 	}
 
-	void HighScoreSet (float score) {
+	void HighScoreSet (int score) {
 		string [] highscoreArray = new string [5] {"High Score-1", "High Score-2", "High Score-3", "High Score-4", "High Score-5"}; 
-		List<int> scoreList = new List<float>();
+		List<int> scoreList = new List<int>();
 		int count = 0;
 		while (count != 5){
 			scoreList.Add(PlayerPrefs.GetInt(highscoreArray[count]));
@@ -105,6 +109,7 @@ public class BallMovement : MonoBehaviour {
 		}
 		scoreList.Add (score);
 		scoreList.Sort ();
+		scoreList.Reverse ();   //for reversed sort effect
 		scoreList.RemoveAt (5); //remove the last item in the list
 		count = 0;
 		while (count != 5) {
@@ -115,26 +120,23 @@ public class BallMovement : MonoBehaviour {
 
 	void HighScoreListen () {
 		string [] highscoreArray = new string [5] {"High Score-1", "High Score-2", "High Score-3", "High Score-4", "High Score-5"}; 
-		string highScores = "";
+		string highscoreString = "";
 		int count = 0;
 		while (count != 5) {
-			if (count != 4) highScores += PlayerPrefs.GetInt(highscoreArray[count]) + ", ";
-			else highScores += "and " + PlayerPrefs.GetInt(highscoreArray[count]);
+			if (count != 4) highscoreString += PlayerPrefs.GetInt(highscoreArray[count]) + ", ";
+			else highscoreString += "and " + PlayerPrefs.GetInt(highscoreArray[count]);
 			count += 1;
 		}
+		Talk ("The top 5 highscores are " + highscoreString);
 	}
 
 	void Talk (string message) {
 		System.Diagnostics.Process.Start ("say", message);
 	}
 
-	IEnumerator WaitTalk (string message){
-		yield return new WaitForSeconds (5);
+	IEnumerator WaitTalk (int sec, string message){
+		yield return new WaitForSeconds (sec);
 		Talk (message);
 	}
-
-//	string num2str (int score) {
-//
-//	}
-
+	
 }
