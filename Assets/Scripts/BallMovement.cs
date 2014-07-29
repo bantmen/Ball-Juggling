@@ -54,7 +54,7 @@ public class BallMovement : MonoBehaviour {
 				UnityEngine.Debug.Log(scoreInt);
 				string scoreStr = scoreInt.ToString();
 				HighScoreSet(scoreInt);
-				Talk ("Your score was" + scoreStr + "To continue the game press Q button");
+				Talk ("Your score was " + scoreStr + "To continue the game press Q button");
 				StartCoroutine(WaitTalk(6, "To listen to the highscores table press the W button. " +
 					"To go to the tutorial screen press the Tab key"));
 			}
@@ -138,5 +138,5 @@ public class BallMovement : MonoBehaviour {
 		yield return new WaitForSeconds (sec);
 		Talk (message);
 	}
-	
+
 }

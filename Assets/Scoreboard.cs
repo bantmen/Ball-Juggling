@@ -8,7 +8,7 @@ public class Scoreboard : MonoBehaviour {
 //		PlayerPrefs.SetInt ("High Score-2", 2500);
 //		PlayerPrefs.SetInt ("High Score-3", 1350);
 //		PlayerPrefs.SetInt ("High Score-4", 780);
-		PlayerPrefs.SetInt ("High Score-5", 0);
+//		PlayerPrefs.SetInt ("High Score-5", 0);
 	}
 	
 	void Update () {
