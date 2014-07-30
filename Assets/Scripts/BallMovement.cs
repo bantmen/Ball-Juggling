@@ -24,6 +24,10 @@ public class BallMovement : MonoBehaviour {
 
 	public byte playLoud;  //2 loudest 0 softest
 
+	public bool kickLanded; //trying to fix the audio issue
+
+	public bool scale;   //if true, then hit sound scales with loudness mode
+
 	void Start () {
 		GameObject go = GameObject.Find ("Player");
 		script = go.GetComponent <PlayerMovement> ();
@@ -36,7 +40,9 @@ public class BallMovement : MonoBehaviour {
 
 		if (playLoud == 2) audio.volume = 0.300f;
 		else if (playLoud == 1) audio.volume = 0.175f;
-		else audio.volume = 0.050f;
+		else if (playLoud == 0) audio.volume = 0.050f;
+
+		kickLanded = false;
 	}
 
 	void Update () {
@@ -55,7 +61,7 @@ public class BallMovement : MonoBehaviour {
 				string scoreStr = scoreInt.ToString();
 				HighScoreSet(scoreInt);
 				Talk ("Your score was " + scoreStr + "To continue the game press Q button");
-				StartCoroutine(WaitTalk(6, "To listen to the highscores table press the W button. " +
+				StartCoroutine(WaitTalk(8, "To listen to the highscores table press the W button. " +
 					"To go to the tutorial screen press the Tab key"));
 			}
 			if (Input.GetKeyDown (KeyCode.W)) {
@@ -81,11 +87,12 @@ public class BallMovement : MonoBehaviour {
 					velocity.y = Random.Range (4.5f, 7.5f);
 					score += 100 / temp_kickCount;
 					temp_kickCount = 0;
-					audio.volume = 0.900f;
-					audio.PlayOneShot(kick_hit_sound);
-					if (playLoud == 2) audio.volume = 0.300f;
-					else if (playLoud == 1) audio.volume = 0.175f;
-					else audio.volume = 0.050f;
+					if (scale) {
+						audio.PlayOneShot(kick_hit_sound);
+					}
+					else {
+						kickLanded = true;
+					}
 				}
 				else{
 					audio.PlayOneShot(kick_swing_sound);

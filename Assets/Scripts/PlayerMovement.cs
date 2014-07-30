@@ -8,11 +8,16 @@ public class PlayerMovement : MonoBehaviour {
 
 	BallMovement script;
 
+	GameObject go;
+	GameObject go2;
+
+	public AudioClip kick;
+
 	void Start () {
-		GameObject go = GameObject.Find ("Player");
+		go = GameObject.Find ("Player");
 		animator = go.GetComponent<Animator> ();
 
-		GameObject go2 = GameObject.Find ("ball");
+		go2 = GameObject.Find ("ball");
 		script = go2.GetComponent<BallMovement> ();
 	}
 	
@@ -28,6 +33,11 @@ public class PlayerMovement : MonoBehaviour {
 			animator.SetTrigger("Kicked");
 			didKick = false;
 		}
-		
+
+		if (script.kickLanded){
+			script.kickLanded = false;
+			//go2.audio.PlayOneShot(kick_hit_sound);
+			audio.PlayOneShot(kick);
+		}
 	}
 }
