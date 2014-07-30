@@ -1,11 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="../../Documents/ball-juggling/Assets/Scripts/BallMovement.cs">
     <Files>
+      <File FileName="../../Documents/ball-juggling/Assets/Tutorial.cs" Line="21" Column="3" />
       <File FileName="../../Documents/ball-juggling/Assets/MoveGetReady.cs" Line="6" Column="1" />
-      <File FileName="../../Documents/ball-juggling/Assets/Scripts/BallMovement.cs" Line="142" Column="2" />
-      <File FileName="Assets/Scoreboard.cs" Line="11" Column="40" />
-      <File FileName="Assets/Tutorial.cs" Line="26" Column="37" />
+      <File FileName="../../Documents/ball-juggling/Assets/Scripts/BallMovement.cs" Line="141" Column="1" />
+      <File FileName="Assets/Scoreboard.cs" Line="11" Column="3" />
+      <File FileName="Assets/Tutorial.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
